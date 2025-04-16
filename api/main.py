@@ -1,19 +1,25 @@
 from fastapi import FastAPI, Query
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 import pandas as pd
 import joblib
 import wandb
+import sys
+import os
 
 # 🌟 Tạo app
 app = FastAPI()
 
-# 🌟 Kết nối W&B
-run = wandb.init(project="Bank-Marketing", job_type="api")
+run = wandb.init(
+    project="Bank-Marketing", 
+    job_type="api", 
+)
+
 
 # 🌟 Map tên model với tên artifact trong W&B
 MODEL_ARTIFACTS = {
-    "random_forest": "luquc-national-economics-university/Bank-Marketing/rf-model:latest",
-    "logistic": "luquc-national-economics-university/Bank-Marketing/lr_model:latest"
+    "random_forest": "Bank-Marketing/rf-model:latest",
+    "logistic": "Bank-Marketing/lr_model:latest"
 }
 
 # 🌟 Định nghĩa input
@@ -40,13 +46,17 @@ class BankInput(BaseModel):
     nr_employed: float
 
 # 🌟 Route GET chào mừng
-@app.get("/")
-def home():
-    return {"message": "Welcome to Mushroom Classifier API 👋"}
+@app.get("/", response_class=HTMLResponse)
+async def root():
+    return """
+    <p><span style="font-size:28px"><strong>Hello World</strong></span></p>"""\
+    """<p><span style="font-size:20px">In this project, we will apply the skills """\
+        """acquired in the Deploying a Scalable ML Pipeline in Production course to develop """\
+        """a classification model on publicly available"""
 
 # 🌟 Route POST để dự đoán
 @app.post("/predict")
-def predict(input_data: BankInput, model_name: str = Query("random_forest")):
+def predict(input_data: BankInput, model_name: str = Query("rf-model")):
     # 1. Kiểm tra model_name
     if model_name not in MODEL_ARTIFACTS:
         return {"error": f"Model '{model_name}' not found. Choose from {list(MODEL_ARTIFACTS.keys())}"}
