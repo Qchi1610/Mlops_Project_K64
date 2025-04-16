@@ -1,4 +1,4 @@
-name: mushroom
+name: bankmkt
 channels:
   - conda-forge
   - defaults
