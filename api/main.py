@@ -10,12 +10,6 @@ import os
 # 🌟 Tạo app
 app = FastAPI()
 
-run = wandb.init(
-    project="Bank-Marketing", 
-    job_type="api", 
-)
-
-
 # 🌟 Map tên model với tên artifact trong W&B
 MODEL_ARTIFACTS = {
     "random_forest": "Bank-Marketing/rf-model:latest",
@@ -56,12 +50,17 @@ async def root():
 
 # 🌟 Route POST để dự đoán
 @app.post("/predict")
-def predict(input_data: BankInput, model_name: str = Query("rf-model")):
+def predict(input_data: BankInput, model_name: str = Query("random_forest")):
+    # Đăng nhập W&B nếu chưa đăng nhập
+    if not wandb.run:
+        wandb.login()
+
     # 1. Kiểm tra model_name
     if model_name not in MODEL_ARTIFACTS:
         return {"error": f"Model '{model_name}' not found. Choose from {list(MODEL_ARTIFACTS.keys())}"}
     
-    # 2. Load model từ W&B artifact
+    # 2. Khởi tạo W&B run và load model từ W&B artifact
+    run = wandb.init(project="Bank-Marketing", job_type="api", reinit=True)  # reinit=True để tránh khởi tạo lại nhiều lần
     model_path = run.use_artifact(MODEL_ARTIFACTS[model_name]).file()
     model = joblib.load(model_path)
 
