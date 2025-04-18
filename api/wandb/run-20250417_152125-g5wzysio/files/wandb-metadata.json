@@ -1,0 +1,36 @@
+{
+  "os":  "Windows-10-10.0.22631-SP0",
+  "python":  "3.8.20",
+  "startedAt":  "2025-04-17T08:21:25.653096Z",
+  "args":  [
+    "main:app",
+    "--reload"
+  ],
+  "program":  "C:\\Users\\HP\\anaconda3\\envs\\bankmkt\\Scripts\\uvicorn-script.py",
+  "codePath":  "..\\Users\\HP\\anaconda3\\envs\\bankmkt\\Scripts\\uvicorn-script.py",
+  "git":  {
+    "remote":  "https://github.com/Qchi1610/Mlops_Project_K64.git",
+    "commit":  "13fcebea5ed951b92bfa47af008c6a21c34771f0"
+  },
+  "email":  "luongquynhchi11@gmail.com",
+  "root":  "C:\\Mlops_Project_K64\\api",
+  "host":  "DESKTOP-5F2EDUR",
+  "username":  "Luquc",
+  "executable":  "C:\\Users\\HP\\anaconda3\\envs\\bankmkt\\python.exe",
+  "codePathLocal":  "..\\..\\Users\\HP\\anaconda3\\envs\\bankmkt\\Scripts\\uvicorn-script.py",
+  "cpu_count":  10,
+  "cpu_count_logical":  12,
+  "disk":  {
+    "/":  {
+      "total":  "214002761728",
+      "used":  "203085574144"
+    }
+  },
+  "memory":  {
+    "total":  "16858472448"
+  },
+  "cpu":  {
+    "count":  10,
+    "countLogical":  12
+  }
+}
