@@ -1,0 +1,507 @@
+warning: LF will be replaced by CRLF in bank-additional-full.csv.
+The file will have its original line endings in your working directory
+diff --git a/fetch_data.ipynb b/fetch_data.ipynb
+deleted file mode 100644
+index 24a4c29..0000000
+--- a/fetch_data.ipynb
++++ /dev/null
+@@ -1,464 +0,0 @@
+-{
+- "cells": [
+-  {
+-   "cell_type": "code",
+-   "execution_count": 1,
+-   "metadata": {},
+-   "outputs": [],
+-   "source": [
+-    "import os\n",
+-    "import wandb\n",
+-    "import pandas as pd"
+-   ]
+-  },
+-  {
+-   "cell_type": "code",
+-   "execution_count": 4,
+-   "metadata": {},
+-   "outputs": [
+-    {
+-     "name": "stderr",
+-     "output_type": "stream",
+-     "text": [
+-      "\u001b[34m\u001b[1mwandb\u001b[0m: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.\n",
+-      "\u001b[34m\u001b[1mwandb\u001b[0m: Currently logged in as: \u001b[33mluquc\u001b[0m (\u001b[33mluquc-national-economics-university\u001b[0m). Use \u001b[1m`wandb login --relogin`\u001b[0m to force relogin\n"
+-     ]
+-    },
+-    {
+-     "data": {
+-      "text/plain": [
+-       "True"
+-      ]
+-     },
+-     "execution_count": 4,
+-     "metadata": {},
+-     "output_type": "execute_result"
+-    }
+-   ],
+-   "source": [
+-    "from dotenv import load_dotenv\n",
+-    "\n",
+-    "load_dotenv()\n",
+-    "WANDB_API_KEY = os.environ.get('WANDB_API_KEY')\n",
+-    "\n",
+-    "wandb.login(key=WANDB_API_KEY)"
+-   ]
+-  },
+-  {
+-   "cell_type": "code",
+-   "execution_count": 45,
+-   "metadata": {},
+-   "outputs": [],
+-   "source": [
+-    "df = pd.read_csv(\"D:/Mlops_Project_K64/bank-additional-full.csv\", sep=\";\")\n",
+-    "X = df.drop(columns=[\"y\"])\n",
+-    "y = df[\"y\"]"
+-   ]
+-  },
+-  {
+-   "cell_type": "code",
+-   "execution_count": 46,
+-   "metadata": {},
+-   "outputs": [
+-    {
+-     "name": "stdout",
+-     "output_type": "stream",
+-     "text": [
+-      "<class 'pandas.core.frame.DataFrame'>\n",
+-      "RangeIndex: 41188 entries, 0 to 41187\n",
+-      "Data columns (total 21 columns):\n",
+-      " #   Column          Non-Null Count  Dtype  \n",
+-      "---  ------          --------------  -----  \n",
+-      " 0   age             41188 non-null  int64  \n",
+-      " 1   job             41188 non-null  object \n",
+-      " 2   marital         41188 non-null  object \n",
+-      " 3   education       41188 non-null  object \n",
+-      " 4   default         41188 non-null  object \n",
+-      " 5   housing         41188 non-null  object \n",
+-      " 6   loan            41188 non-null  object \n",
+-      " 7   contact         41188 non-null  object \n",
+-      " 8   month           41188 non-null  object \n",
+-      " 9   day_of_week     41188 non-null  object \n",
+-      " 10  duration        41188 non-null  int64  \n",
+-      " 11  campaign        41188 non-null  int64  \n",
+-      " 12  pdays           41188 non-null  int64  \n",
+-      " 13  previous        41188 non-null  int64  \n",
+-      " 14  poutcome        41188 non-null  object \n",
+-      " 15  emp.var.rate    41188 non-null  float64\n",
+-      " 16  cons.price.idx  41188 non-null  float64\n",
+-      " 17  cons.conf.idx   41188 non-null  float64\n",
+-      " 18  euribor3m       41188 non-null  float64\n",
+-      " 19  nr.employed     41188 non-null  float64\n",
+-      " 20  y               41188 non-null  object \n",
+-      "dtypes: float64(5), int64(5), object(11)\n",
+-      "memory usage: 6.6+ MB\n"
+-     ]
+-    }
+-   ],
+-   "source": [
+-    "df.info()"
+-   ]
+-  },
+-  {
+-   "cell_type": "code",
+-   "execution_count": 47,
+-   "metadata": {},
+-   "outputs": [],
+-   "source": [
+-    "from sklearn.model_selection import train_test_split\n",
+-    "\n",
+-    "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)"
+-   ]
+-  },
+-  {
+-   "cell_type": "code",
+-   "execution_count": 48,
+-   "metadata": {},
+-   "outputs": [],
+-   "source": [
+-    "X_train_enc = pd.get_dummies(X_train, drop_first=True)\n",
+-    "X_test_enc = pd.get_dummies(X_test, drop_first=True)"
+-   ]
+-  },
+-  {
+-   "cell_type": "code",
+-   "execution_count": 53,
+-   "metadata": {},
+-   "outputs": [
+-    {
+-     "data": {
+-      "text/html": [
+-       "Tracking run with wandb version 0.18.7"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       "Run data is saved locally in <code>d:\\Mlops_Project_K64\\wandb\\run-20250416_180203-590mm2ur</code>"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       "Syncing run <strong><a href='https://wandb.ai/luquc-national-economics-university/Bank-Marketing/runs/590mm2ur' target=\"_blank\">classic-water-4</a></strong> to <a href='https://wandb.ai/luquc-national-economics-university/Bank-Marketing' target=\"_blank\">Weights & Biases</a> (<a href='https://wandb.me/developer-guide' target=\"_blank\">docs</a>)<br/>"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       " View project at <a href='https://wandb.ai/luquc-national-economics-university/Bank-Marketing' target=\"_blank\">https://wandb.ai/luquc-national-economics-university/Bank-Marketing</a>"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       " View run at <a href='https://wandb.ai/luquc-national-economics-university/Bank-Marketing/runs/590mm2ur' target=\"_blank\">https://wandb.ai/luquc-national-economics-university/Bank-Marketing/runs/590mm2ur</a>"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "application/vnd.jupyter.widget-view+json": {
+-       "model_id": "87bb35b4f4ef4d5a949c1f53fbc0e5ec",
+-       "version_major": 2,
+-       "version_minor": 0
+-      },
+-      "text/plain": [
+-       "VBox(children=(Label(value='0.003 MB of 0.003 MB uploaded\\r'), FloatProgress(value=1.0, max=1.0)))"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       " View run <strong style=\"color:#cdcd00\">classic-water-4</strong> at: <a href='https://wandb.ai/luquc-national-economics-university/Bank-Marketing/runs/590mm2ur' target=\"_blank\">https://wandb.ai/luquc-national-economics-university/Bank-Marketing/runs/590mm2ur</a><br/> View project at: <a href='https://wandb.ai/luquc-national-economics-university/Bank-Marketing' target=\"_blank\">https://wandb.ai/luquc-national-economics-university/Bank-Marketing</a><br/>Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       "Find logs at: <code>.\\wandb\\run-20250416_180203-590mm2ur\\logs</code>"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    }
+-   ],
+-   "source": [
+-    "run = wandb.init(project=\"Bank-Marketing\", job_type=\"data\")\n",
+-    "\n",
+-    "# Log artifact\n",
+-    "artifact = wandb.Artifact(\"raw_data\", type=\"dataset\")\n",
+-    "artifact.add_file(\"D:/Mlops_Project_K64/bank-additional-full.csv\")\n",
+-    "run.log_artifact(artifact)\n",
+-    "\n",
+-    "run.finish()"
+-   ]
+-  },
+-  {
+-   "cell_type": "code",
+-   "execution_count": null,
+-   "metadata": {},
+-   "outputs": [
+-    {
+-     "data": {
+-      "text/html": [
+-       "Finishing last run (ID:db518xzz) before initializing another..."
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       " View run <strong style=\"color:#cdcd00\">avid-thunder-2</strong> at: <a href='https://wandb.ai/luquc-national-economics-university/Bank-Marketing/runs/db518xzz' target=\"_blank\">https://wandb.ai/luquc-national-economics-university/Bank-Marketing/runs/db518xzz</a><br/> View project at: <a href='https://wandb.ai/luquc-national-economics-university/Bank-Marketing' target=\"_blank\">https://wandb.ai/luquc-national-economics-university/Bank-Marketing</a><br/>Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       "Find logs at: <code>.\\wandb\\run-20250416_165311-db518xzz\\logs</code>"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       "Successfully finished last run (ID:db518xzz). Initializing new run:<br/>"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       "Tracking run with wandb version 0.18.7"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       "Run data is saved locally in <code>d:\\Mlops_Project_K64\\wandb\\run-20250416_165336-qj5km7x4</code>"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       "Syncing run <strong><a href='https://wandb.ai/luquc-national-economics-university/Bank-Marketing/runs/qj5km7x4' target=\"_blank\">desert-shape-3</a></strong> to <a href='https://wandb.ai/luquc-national-economics-university/Bank-Marketing' target=\"_blank\">Weights & Biases</a> (<a href='https://wandb.me/developer-guide' target=\"_blank\">docs</a>)<br/>"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       " View project at <a href='https://wandb.ai/luquc-national-economics-university/Bank-Marketing' target=\"_blank\">https://wandb.ai/luquc-national-economics-university/Bank-Marketing</a>"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       " View run at <a href='https://wandb.ai/luquc-national-economics-university/Bank-Marketing/runs/qj5km7x4' target=\"_blank\">https://wandb.ai/luquc-national-economics-university/Bank-Marketing/runs/qj5km7x4</a>"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.HTML object>"
+-      ]
+-     },
+-     "metadata": {},
+-     "output_type": "display_data"
+-    },
+-    {
+-     "data": {
+-      "text/html": [
+-       "<button onClick=\"this.nextSibling.style.display='block';this.style.display='none';\">Display W&B run</button><iframe src='https://wandb.ai/luquc-national-economics-university/Bank-Marketing/runs/qj5km7x4?jupyter=true' style='border:none;width:100%;height:420px;display:none;'></iframe>"
+-      ],
+-      "text/plain": [
+-       "<wandb.sdk.wandb_run.Run at 0x225dd4d1550>"
+-      ]
+-     },
+-     "execution_count": 49,
+-     "metadata": {},
+-     "output_type": "execute_result"
+-    }
+-   ],
+-   "source": [
+-    "run = wandb.init(project=\"Bank-Marketing\", job_type=\"training\")"
+-   ]
+-  },
+-  {
+-   "cell_type": "code",
+-   "execution_count": null,
+-   "metadata": {},
+-   "outputs": [
+-    {
+-     "name": "stderr",
+-     "output_type": "stream",
+-     "text": [
+-      "c:\\Users\\HP\\anaconda3\\envs\\mushroom\\lib\\site-packages\\sklearn\\linear_model\\_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):\n",
+-      "STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.\n",
+-      "\n",
+-      "Increase the number of iterations (max_iter) or scale the data as shown in:\n",
+-      "    https://scikit-learn.org/stable/modules/preprocessing.html\n",
+-      "Please also refer to the documentation for alternative solver options:\n",
+-      "    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression\n",
+-      "  n_iter_i = _check_optimize_result(\n"
+-     ]
+-    },
+-    {
+-     "data": {
+-      "text/plain": [
+-       "<Artifact lr-model>"
+-      ]
+-     },
+-     "execution_count": 50,
+-     "metadata": {},
+-     "output_type": "execute_result"
+-    }
+-   ],
+-   "source": [
+-    "from sklearn.linear_model import LogisticRegression\n",
+-    "from sklearn.ensemble import RandomForestClassifier\n",
+-    "import joblib\n",
+-    "\n",
+-    "# Train model 1\n",
+-    "model_rf = RandomForestClassifier()\n",
+-    "model_rf.fit(X_train_enc, y_train)\n",
+-    "wandb.log({\"rf_accuracy\": model_rf.score(X_test_enc, y_test)})\n",
+-    "\n",
+-    "# Log model_rf as artifact (save it as a file in memory before uploading)\n",
+-    "artifact_rf = wandb.Artifact(\"rf-model\", type=\"model\")\n",
+-    "model_rf_filename = \"model_rf.pkl\"\n",
+-    "joblib.dump(model_rf, model_rf_filename)  # Save the model as a .pkl file\n",
+-    "artifact_rf.add_file(model_rf_filename)  # Add the saved model file to the artifact\n",
+-    "run.log_artifact(artifact_rf)\n",
+-    "\n",
+-    "# Train model 2\n",
+-    "model_lr = LogisticRegression()\n",
+-    "model_lr.fit(X_train_enc, y_train)\n",
+-    "run.log({\"lr_accuracy\": model_lr.score(X_test_enc, y_test)})\n",
+-    "\n",
+-    "# Log model_lr as artifact (save it as a file in memory before uploading)\n",
+-    "artifact_lr = wandb.Artifact(\"lr-model\", type=\"model\")\n",
+-    "model_lr_filename = \"model_lr.pkl\"\n",
+-    "joblib.dump(model_lr, model_lr_filename)  # Save the model as a .pkl file\n",
+-    "artifact_lr.add_file(model_lr_filename)  # Add the saved model file to the artifact\n",
+-    "run.log_artifact(artifact_lr)"
+-   ]
+-  },
+-  {
+-   "cell_type": "code",
+-   "execution_count": 51,
+-   "metadata": {},
+-   "outputs": [],
+-   "source": [
+-    "# # For versioning, you can append the current run or a version number\n",
+-    "# import time\n",
+-    "# artifact_rf = wandb.Artifact(f\"rf-model-v{int(time.time())}\", type=\"model\")\n",
+-    "# artifact_rf.add_file(model_rf_filename)  # Add the saved model file to the artifact\n",
+-    "# wandb.log_artifact(artifact_rf)\n"
+-   ]
+-  }
+- ],
+- "metadata": {
+-  "kernelspec": {
+-   "display_name": "bankmkt",
+-   "language": "python",
+-   "name": "python3"
+-  },
+-  "language_info": {
+-   "codemirror_mode": {
+-    "name": "ipython",
+-    "version": 3
+-   },
+-   "file_extension": ".py",
+-   "mimetype": "text/x-python",
+-   "name": "python",
+-   "nbconvert_exporter": "python",
+-   "pygments_lexer": "ipython3",
+-   "version": "3.8.20"
+-  }
+- },
+- "nbformat": 4,
+- "nbformat_minor": 2
+-}
+diff --git a/requirements.txt b/requirements.txt
+index 37fde52..300e862 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,15 +1,16 @@
+-pytest==6.2.5
+-pandas==1.3.5
+-matplotlib==3.5.3
+-seaborn==0.13.2
+-pydantic==2.10.0
+-ydata-profiling==4.16.1
+-ipywidgets==8.1.5
+-scipy==1.10.1
+ numpy==1.21.5
+-scikit-learn==1.0.2
+-joblib==1.4.2
+ uvicorn==0.17.5
+-fastapi==0.115.12
+-wandb==0.18.7
+-httpx==0.28.1
+\ No newline at end of file
++requests==2.27.1
++fastapi==0.74.0
++scikit-learn==1.0.2
++jupyterlab==3.2.9
++jupyter==1.0.0
++ipywidgets==7.6.5
++jupyterlab-widgets==1.0.2
++gitpython==3.1.30
++pydantic==1.9.0
++pyyaml==5.4.1
++pip==21.3.1
++pandas==1.3.5
++pytest==6.2.5
++wandb==0.12.14
