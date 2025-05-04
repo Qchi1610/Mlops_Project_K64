@@ -1,0 +1,35 @@
+{
+  "os": "Windows-10-10.0.22631-SP0",
+  "python": "CPython 3.8.20",
+  "startedAt": "2025-05-04T04:26:38.431674Z",
+  "args": [
+    ".",
+    "-vv"
+  ],
+  "program": "C:\\Users\\Admin\\miniconda3\\envs\\bankmkt\\Scripts\\pytest-script.py",
+  "codePath": "..\\Users\\Admin\\miniconda3\\envs\\bankmkt\\Scripts\\pytest-script.py",
+  "git": {
+    "remote": "https://github.com/Qchi1610/Mlops_Project_K64.git",
+    "commit": "13fcebea5ed951b92bfa47af008c6a21c34771f0"
+  },
+  "email": "hangtn13.ssc@gmail.com",
+  "root": "c:\\Mlops_Project_K64",
+  "host": "SSD",
+  "executable": "C:\\Users\\Admin\\miniconda3\\envs\\bankmkt\\python.exe",
+  "codePathLocal": "..\\Users\\Admin\\miniconda3\\envs\\bankmkt\\Scripts\\pytest-script.py",
+  "cpu_count": 4,
+  "cpu_count_logical": 8,
+  "disk": {
+    "/": {
+      "total": "170583252992",
+      "used": "165951479808"
+    }
+  },
+  "memory": {
+    "total": "17065791488"
+  },
+  "cpu": {
+    "count": 4,
+    "countLogical": 8
+  }
+}
