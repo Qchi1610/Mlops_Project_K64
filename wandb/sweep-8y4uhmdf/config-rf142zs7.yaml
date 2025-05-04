@@ -1,0 +1,10 @@
+wandb_version: 1
+
+criterion:
+  value: entropy
+model:
+  value: 0
+random_state:
+  value: 41
+splitter:
+  value: best
