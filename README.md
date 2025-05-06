@@ -13,3 +13,16 @@ Chạy lệnh sau để conda tự tạo env bankmkt
 ```bash
 conda env create -f environment.yml
 ```
+Lệnh chạy api
+```bash
+uvicorn api.main:app --reload
+```
+
+lệnh test_main
+```bash
+pytest test_main.py
+```
+lệnh chạy query_live_api
+```bash
+python api\python api\query_live_api.py.py
+```

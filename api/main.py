@@ -1,22 +1,40 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, HTTPException
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 import pandas as pd
 import joblib
 import wandb
-import sys
 import os
+import sys
+from datetime import datetime
+from pymongo import MongoClient
+from api.pipeline import FeatureSelector, CategoricalTransformer, NumericalTransformer
 
-# 🌟 Tạo app
+# global variables
+setattr(sys.modules["__main__"], "FeatureSelector", FeatureSelector)
+setattr(sys.modules["__main__"], "CategoricalTransformer", CategoricalTransformer)
+setattr(sys.modules["__main__"], "NumericalTransformer", NumericalTransformer)
+
+# 🗄️ Cấu hình MongoDB
+MONGODB_URI = os.getenv(
+    "MONGODB_URI",
+    "mongodb+srv://luquc11:luquc11@cluster0.ryesptx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+)
+DB_NAME = os.getenv("DB_NAME", "Bank_mkt")
+COLLECTION_NAME = os.getenv("COLLECTION_NAME", "bank_mkt_input")
+
+# Khởi kết nối MongoDB
+tmp_client = MongoClient(MONGODB_URI)
+db = tmp_client[DB_NAME]
+collection = db[COLLECTION_NAME]
+
+# initiate the wandb project
+run = wandb.init(project="Bank-Marketing",job_type="api")
+
 app = FastAPI()
+ARTIFACT = "hangtn13-ssc-national-economics-university/Bank-Marketing/model_export:v0"
 
-# 🌟 Map tên model với tên artifact trong W&B
-MODEL_ARTIFACTS = {
-    "random_forest": "Bank-Marketing/rf-model:latest",
-    "logistic": "Bank-Marketing/lr_model:latest"
-}
-
-# 🌟 Định nghĩa input
+# Định nghĩa input
 class BankInput(BaseModel):
     age: int
     job: str
@@ -26,9 +44,8 @@ class BankInput(BaseModel):
     housing: str
     loan: str
     contact: str
-    month: str
-    day_of_week: str
-    duration: int
+    month: int
+    day_of_week: int
     campaign: int
     pdays: int
     previous: int
@@ -38,40 +55,31 @@ class BankInput(BaseModel):
     cons_conf_idx: float
     euribor3m: float
     nr_employed: float
+    pdays_contacted_status: int
 
-# 🌟 Route GET chào mừng
 @app.get("/", response_class=HTMLResponse)
 async def root():
-    return """
-    <p><span style="font-size:28px"><strong>Hello World</strong></span></p>"""\
-    """<p><span style="font-size:20px">In this project, we will apply the skills """\
-        """acquired in the Deploying a Scalable ML Pipeline in Production course to develop """\
-        """a classification model on publicly available"""
+    return "<h1>Bank Marketing Model API</h1>"
 
-# 🌟 Route POST để dự đoán
 @app.post("/predict")
-def predict(input_data: BankInput, model_name: str = Query("random_forest")):
-    # Đăng nhập W&B nếu chưa đăng nhập
-    if not wandb.run:
-        wandb.login()
+@app.post("/predict")
+def predict(input_data: BankInput):
+    try:
+        model_export_path = run.use_artifact(ARTIFACT).file()
+        pipe = joblib.load(model_export_path)
+        df = pd.DataFrame([input_data.dict()])
+        predict = pipe.predict(df)
+        label = "yes" if predict[0] <= 0.5 else "no"
 
-    # 1. Kiểm tra model_name
-    if model_name not in MODEL_ARTIFACTS:
-        return {"error": f"Model '{model_name}' not found. Choose from {list(MODEL_ARTIFACTS.keys())}"}
+        # Log vào Mongo
+        doc = { **input_data.dict(), "prediction": label, "timestamp": datetime.utcnow() }
+        try:
+            collection.insert_one(doc)
+        except Exception as e:
+            print("Mongo insert error:", e)
+
+        return {"input": input_data.dict(), "prediction": label}
     
-    # 2. Khởi tạo W&B run và load model từ W&B artifact
-    run = wandb.init(project="Bank-Marketing", job_type="api", reinit=True)  # reinit=True để tránh khởi tạo lại nhiều lần
-    model_path = run.use_artifact(MODEL_ARTIFACTS[model_name]).file()
-    model = joblib.load(model_path)
-
-    # 3. Convert input về DataFrame
-    df = pd.DataFrame([input_data.dict()])
-
-    # 4. Dự đoán
-    prediction = model.predict(df)[0]
-
-    return {
-        "model_used": model_name,
-        "input": input_data.dict(),
-        "prediction": "edible" if prediction == 0 else "poisonous"
-    }
+    except Exception as e:
+        print("❌ Prediction Error:", e)
+        raise HTTPException(status_code=500, detail=str(e))
