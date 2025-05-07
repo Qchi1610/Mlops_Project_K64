@@ -20,9 +20,9 @@ uvicorn api.main:app --reload
 
 lệnh test_main
 ```bash
-pytest test_main.py
+pytest api/test_main.py
 ```
 lệnh chạy query_live_api
 ```bash
-python api\query_live_api.py
+python api/query_live_api.py
 ```

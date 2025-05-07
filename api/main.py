@@ -32,7 +32,7 @@ collection = db[COLLECTION_NAME]
 run = wandb.init(project="Bank-Marketing",job_type="api")
 
 app = FastAPI()
-ARTIFACT = "hangtn13-ssc-national-economics-university/Bank-Marketing/model_export:v0"
+ARTIFACT = "hangtn13-ssc-national-economics-university/Bank-Marketing/model_export:latest"
 
 # Định nghĩa input
 class BankInput(BaseModel):
@@ -44,8 +44,8 @@ class BankInput(BaseModel):
     housing: str
     loan: str
     contact: str
-    month: int
-    day_of_week: int
+    month: str
+    day_of_week: str
     campaign: int
     pdays: int
     previous: int
@@ -69,7 +69,7 @@ def predict(input_data: BankInput):
         pipe = joblib.load(model_export_path)
         df = pd.DataFrame([input_data.dict()])
         predict = pipe.predict(df)
-        label = "yes" if predict[0] <= 0.5 else "no"
+        label = "no" if predict[0] <= 0.5 else "yes"
 
         # Log vào Mongo
         doc = { **input_data.dict(), "prediction": label, "timestamp": datetime.utcnow() }

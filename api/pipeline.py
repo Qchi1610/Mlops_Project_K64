@@ -62,8 +62,8 @@ class CategoricalTransformer(BaseEstimator, TransformerMixin):
             }
 
             weekday_map = {
-                'mon': 2, 'tue': 3, 'wed': 4, # Thường thứ Hai là 1, ..., Chủ Nhật là 7 hoặc 0
-                'thu': 5, 'fri': 6, 'sat': 7, 'sun': 8, # Sửa lại map cho hợp lý hơn (1-7)
+                'mon': 1, 'tue': 2, 'wed': 3,
+                'thu': 4, 'fri': 5, 'sat': 6, 'sun': 7
             }
 
             # Apply the mapping only to the 'education' column
