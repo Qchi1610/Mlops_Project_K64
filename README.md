@@ -24,5 +24,5 @@ pytest test_main.py
 ```
 lệnh chạy query_live_api
 ```bash
-python api\python api\query_live_api.py.py
+python api\query_live_api.py
 ```

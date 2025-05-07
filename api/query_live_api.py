@@ -2,7 +2,7 @@ import requests
 
 url = "http://127.0.0.1:8000/predict"
 input_data = {
-    "age": 56,
+    "age": 45,
     "job": "housemaid",
     "marital": "married",
     "education": "basic.4y",
@@ -10,7 +10,7 @@ input_data = {
     "housing": "no",
     "loan": "no",
     "contact": "telephone",
-    "month": 5,
+    "month": 6,
     "day_of_week": 2,
     "campaign": 1,
     "pdays": 999,
