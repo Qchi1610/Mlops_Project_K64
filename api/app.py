@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-API_URL = "https://mlops-project-k64.onrender.com"
+API_URL = "https://mlops-project-k64.onrender.com/predict"
 
 st.title("Bank Marketing Prediction App")
 st.markdown("Predict whether a customer will subscribe to a term deposit.")
