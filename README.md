@@ -30,3 +30,5 @@ lệnh chạy streamlit
 ```bash
 streamlit run api/app.py
 ```
+
+<kbd> <br> [Bank Marketing App][https://mlopsprojectk64.streamlit.app] <br> </kbd>
