@@ -33,7 +33,7 @@ streamlit run api/app.py
 
 <p align="left">
   <a href="https://mlopsprojectk64.streamlit.app" target="_blank">
-    <img src="https://img.shields.io/badge/Bank_Marketing-red?style=for-the-badge" alt="Bank Marketing App"/>
+    <img src="https://img.shields.io/badge/Launch_App-red?style=plastice" alt="Bank Marketing App"/>
   </a>
 </p>
 
