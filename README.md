@@ -26,3 +26,7 @@ lệnh chạy query_live_api
 ```bash
 python api/query_live_api.py
 ```
+lệnh chạy streamlit
+```bash
+streamlit run api/app.py
+```

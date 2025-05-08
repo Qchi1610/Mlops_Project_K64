@@ -20,3 +20,5 @@ dill
 PyYAML
 plotly
 ydata_profiling
+streamlit
+lightgbm

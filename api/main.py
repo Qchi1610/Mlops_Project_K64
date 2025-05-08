@@ -6,8 +6,9 @@ import joblib
 import wandb
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pymongo import MongoClient
+from dotenv import load_dotenv
 from api.pipeline import FeatureSelector, CategoricalTransformer, NumericalTransformer
 
 # global variables
@@ -15,15 +16,13 @@ setattr(sys.modules["__main__"], "FeatureSelector", FeatureSelector)
 setattr(sys.modules["__main__"], "CategoricalTransformer", CategoricalTransformer)
 setattr(sys.modules["__main__"], "NumericalTransformer", NumericalTransformer)
 
-# 🗄️ Cấu hình MongoDB
-MONGODB_URI = os.getenv(
-    "MONGODB_URI",
-    "mongodb+srv://luquc11:luquc11@cluster0.ryesptx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-)
+# MongoDB
+load_dotenv()
+MONGODB_URI = os.getenv("MONGODB_URI")
 DB_NAME = os.getenv("DB_NAME", "Bank_mkt")
 COLLECTION_NAME = os.getenv("COLLECTION_NAME", "bank_mkt_input")
 
-# Khởi kết nối MongoDB
+# initiate MongoDB
 tmp_client = MongoClient(MONGODB_URI)
 db = tmp_client[DB_NAME]
 collection = db[COLLECTION_NAME]
@@ -34,7 +33,7 @@ run = wandb.init(project="Bank-Marketing",job_type="api")
 app = FastAPI()
 ARTIFACT = "hangtn13-ssc-national-economics-university/Bank-Marketing/model_export:latest"
 
-# Định nghĩa input
+# Define input
 class BankInput(BaseModel):
     age: int
     job: str
@@ -72,7 +71,9 @@ def predict(input_data: BankInput):
         label = "no" if predict[0] <= 0.5 else "yes"
 
         # Log vào Mongo
-        doc = { **input_data.dict(), "prediction": label, "timestamp": datetime.utcnow() }
+        now_vn = datetime.utcnow() + timedelta(hours=7)
+        formatted = now_vn.strftime("%d-%m-%Y %H:%M:%S")
+        doc = { **input_data.dict(), "prediction": label, "timestamp": formatted }
         try:
             collection.insert_one(doc)
         except Exception as e:

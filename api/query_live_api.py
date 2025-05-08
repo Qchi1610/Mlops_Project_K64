@@ -29,7 +29,7 @@ print("Input data:")
 for k, v in input_data.items():
     print(f"  {k}: {v}")
 
-response = requests.post(url, params={"model_name": "random_forest"}, json=input_data)
+response = requests.post(url, params={"model_name": "LightGBM"}, json=input_data)
 print("\nResponse:")
 print("  Status code:", response.status_code)
 
