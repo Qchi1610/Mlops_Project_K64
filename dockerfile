@@ -1,18 +1,22 @@
-# Dockerfile
 FROM python:3.8-slim
 
 # set workdir
 WORKDIR /app
 
-# copy and install dependencies
+# install libgomp and build tools
+RUN apt-get update && \
+    apt-get install -y gcc g++ libgomp1 && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# install python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# copy your code
+# copy code
 COPY . .
 
-# expose port (Render’s default 10000 or change as needed)
-EXPOSE 10000
+# expose port
+EXPOSE 8000
 
-# start command
+# start
 CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
