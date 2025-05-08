@@ -21,4 +21,4 @@ PyYAML
 plotly
 ydata_profiling
 streamlit
-lightgbm
+lightgbm==4.1.0
