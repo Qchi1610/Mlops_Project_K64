@@ -31,4 +31,9 @@ lệnh chạy streamlit
 streamlit run api/app.py
 ```
 
-<kbd> <br> [Bank Marketing App][https://mlopsprojectk64.streamlit.app] <br> </kbd>
+<p align="left">
+  <a href="https://mlopsprojectk64.streamlit.app" target="_blank">
+    <img src="https://img.shields.io/badge/Launch-App-red?style=for-the-badge" alt="Bank Marketing App"/>
+  </a>
+</p>
+
