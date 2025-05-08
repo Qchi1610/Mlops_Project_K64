@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 10000
 
 # start command
-CMD ["uvicorn", "api.main:app"]
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
