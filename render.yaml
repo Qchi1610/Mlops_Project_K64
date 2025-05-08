@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: Mlops_Project_K64
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api.main:app --reload
+    pythonVersion: 3.8
