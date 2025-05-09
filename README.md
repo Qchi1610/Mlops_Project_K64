@@ -30,6 +30,10 @@ lệnh chạy streamlit
 ```bash
 streamlit run api/app.py
 ```
+public link Bank Marketing App
+```bash
+https://mlops-project-k64.onrender.com
+```
 
 <p align="left">
   <a href="https://mlopsprojectk64.streamlit.app" target="_blank">
