@@ -62,19 +62,19 @@ For full attribute definitions, see the paper:
 
 ## 📁 Folder Structure
 
-1. api
+1. api: This folder contains backend source code for handling APIs and data pipelines.
    - app.py
    - main.py
    - pipeline.py
    - query_live_api.py
    - test_main.py
-2. bankmkt
-3. notebook
+2. bankmkt: Contains the core source code or Python package related to the bank marketing use case, such as data processing and model training.
+3. notebook: Directory for experiments, exploratory data analysis, and model development artifacts.
    - notebooks
    - data
    - wandb
    - artifact
-4. environment.yml
+4. environment.yml: Conda environment configuration file listing required dependencies and versions to ensure consistent setup across environments.
 
 ## 📑 Model Card
 
