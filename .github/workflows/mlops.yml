@@ -3,6 +3,7 @@ name: BankMkt CI/CD
 on:
   push:
     branches:
+      - main
       - experiment-1
 
 jobs:
