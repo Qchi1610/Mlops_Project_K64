@@ -122,3 +122,77 @@ You should register Weight and Bias to storage all artifacts, metrics, and model
 Weight and Biases is used to register model training runs. Artifacts, which includes models, plots and statistics, are stored in a Weight and Biases, while the server is run in a Render, local Docker container and accessible via the url specified above.
 
 After each model training, tuning and cross-validation run, the 5 best models are logged with their corresponding accuracy, AUC, recall and specificity on both the validation and test sets. To speed things up, currently also only 5 different parameter combinations are evaluated, but this can easily be adjusted.
+
+---
+
+## 🛠 Tech Stack
+
+* **Backend:** FastAPI
+* **Frontend:** Streamlit
+* **Database:** MongoDB
+* **Deployment:** Render
+
+---
+
+## ⚙️ How It Works
+
+1. **User Interface (Streamlit):**
+
+   * Users access the Streamlit web app.
+   * They input data for prediction.
+   ![Streamlit](img/Streamlit.png)
+2. **Backend API (FastAPI):**
+
+   * Streamlit sends the input data to a FastAPI endpoint (e.g., `/predict`) via a POST request.
+   * FastAPI loads the model, processes the input, returns the prediction.
+   * The data and prediction are saved to MongoDB.
+   ![FastAPI](img/FastAPI.png)
+3. **MongoDB Integration:**
+
+   * FastAPI connects to MongoDB using a URI stored in `.env`.
+   * It saves each prediction request with metadata (timestamp, input, prediction).
+   ![MongoDB](img/MongoDB.png)
+4. **Deployment (Render):**
+
+   * The backend (FastAPI) is deployed as a web service on Render.
+   * The frontend (Streamlit) is deployed separately as a web service.
+   * Communication happens via the backend’s public URL.
+
+---
+
+## 🚀 Deployment Steps (on Render)
+
+### 🧠 Backend (FastAPI)
+![Render](img/Render.png)
+1. Create a new **Web Service** on Render.
+2. Link it to your GitHub repo.
+3. Set the start command:
+
+   ```bash
+   uvicorn api.main:app --host 0.0.0.0 --port 8000
+
+   ```
+4. Make sure `Dockerfile` or `requirements.txt` is correctly set up.
+5. Instance Type choose Free
+5. Set environment variables like `MONGODB_URI`, `WANDB_API_KEY` in the Render dashboard.
+![Render2](img/Render2.png)
+
+### 🎯 Frontend (Streamlit)
+
+1. Create another **Web Service** for Streamlit on [Streamlit Community Cloud](https://blog.streamlit.io/host-your-streamlit-app-for-free/).
+2. In `streamlit_app.py`, use `requests.post(API_URL)` (`API_URL created by Render "....onrender.com/predict"`) to connect to the FastAPI backend.
+3. Set the start command:
+
+   ```bash
+   streamlit run streamlit_app.py
+
+   ```
+
+---
+
+## 📄 Example `.env` File
+
+```bash
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/mydb
+WANDB_API_KEY=your_secret_key
+```
