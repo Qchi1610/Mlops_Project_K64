@@ -8,6 +8,8 @@ on:
 jobs:
   test-and-deploy:
     runs-on: ubuntu-latest
+  env:
+      WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
 
     steps:
     - name: Check out code
@@ -21,14 +23,12 @@ jobs:
     - name: Install dependencies
       run: pip install --upgrade pip && pip install -r requirements.txt
 
-    - name: Run API tests
-      run: pytest api/test_main.py
-      env:
-        WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
-
     - name: Login in wandb
       run: 
         wandb login ${{ secrets.WANDB_KEY_ID }}
+
+    - name: Run API tests
+      run: pytest api/test_main.py
 
     - name: Deploy to Render
       if: success()
