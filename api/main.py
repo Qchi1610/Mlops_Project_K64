@@ -59,7 +59,7 @@ class BankInput(BaseModel):
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
-    return "<h1>Bank Marketing Model API</h1>"
+    return "<h1>Welcome to Bank Marketing Model API</h1>"
 
 @app.post("/predict")
 def predict(input_data: BankInput):
