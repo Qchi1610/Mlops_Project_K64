@@ -17,12 +17,6 @@ This project applies MLOps principles to the entire machine learning lifecycle, 
 
 ---
 
-## 📊 Project Flow
-
-![Flowchart](Flowchart.png)
-
----
-
 ## ⚙️ Technologies Used
 
 - **Python 3.10**
@@ -63,29 +57,19 @@ This project uses the **Bank Marketing Dataset** with social and economic featur
 
 ---
 
-### 📈 Features Overview
-
-| Feature Group | Attributes |
-|---------------|------------|
-| **Client Info** | `age`, `job`, `marital`, `education`, `default`, `housing`, `loan` |
-| **Last Contact** | `contact`, `month`, `day_of_week`, `duration`* |
-| **Campaign Data** | `campaign`, `pdays`, `previous`, `poutcome` |
-| **Social/Economic** | `emp.var.rate`, `cons.price.idx`, `cons.conf.idx`, `euribor3m`, `nr.employed` |
-| **Target** | `y` (binary: `yes` / `no`) |
-
-> ⚠️ **Note on `duration`**: This feature strongly affects the output but is only known after the call. It should be excluded in realistic predictive models and used only for benchmarking.
-
----
-
-### ⚠️ Missing Values
-
-Some categorical features contain missing values labeled as `"unknown"`. You may choose to:
-- Treat `"unknown"` as a separate category
-- Remove or impute these values based on context
-
----
 
 For full attribute definitions, see the paper:  
 **[Moro et al., 2014]** *A Data-Driven Approach to Predict the Success of Bank Telemarketing*
 
+## Model Card
+The model was deployed to the web using the FastAPI package and API tests were created. The API tests will be embedded in a CI/CD framework using GitHub Actions. After we built our API locally and tested it, we deployed it to Render and tested it again live. Weights and Biases were used to manage and track all artifacts.
+![Flowchart](Flowchart.png)
+So, in general, the notebooks used were divided into 7 parts:
 
+1. The search for data
+2. Exploratory analysis
+3. Pre-Processing
+4. Tests
+5. Splitting the data between training and testing.
+6. Training
+7. Test
