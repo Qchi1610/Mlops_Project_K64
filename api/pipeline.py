@@ -5,7 +5,6 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.preprocessing import MinMaxScaler
-import warnings
 
 # === Backward compatibility for artifact loading ===
 class FeatureSelector(BaseEstimator, TransformerMixin):
@@ -19,6 +18,7 @@ class FeatureSelector(BaseEstimator, TransformerMixin):
 
     # Method that describes what this custom transformer need to do
     def transform(self, X, y=None):
+        features = [f for f in self.feature_names if f != 'duration']
         return X[self.feature_names]
 
 class CategoricalTransformer(BaseEstimator, TransformerMixin):

@@ -1,0 +1,23 @@
+{
+    "os": "Windows-10-10.0.22631-SP0",
+    "python": "3.8.20",
+    "heartbeatAt": "2025-05-10T03:07:49.053502",
+    "startedAt": "2025-05-10T03:07:43.948737",
+    "docker": null,
+    "cpu_count": 12,
+    "cuda": null,
+    "args": [
+        "--f=c:\\Users\\HP\\AppData\\Roaming\\jupyter\\runtime\\kernel-v3027d5cb948bb9806141391e14f4b387982bda829.json"
+    ],
+    "state": "running",
+    "program": "<python with no main file>",
+    "git": {
+        "remote": "https://github.com/Qchi1610/Mlops_Project_K64.git",
+        "commit": "ad2aea2dad8427aca3b7c7ee9ed2794f8d7e0251"
+    },
+    "email": "luongquynhchi11@gmail.com",
+    "root": "C:/Mlops_Project_K64_v2",
+    "host": "DESKTOP-5F2EDUR",
+    "username": "Luquc",
+    "executable": "c:\\Users\\HP\\anaconda3\\envs\\bankmkt\\python.exe"
+}
