@@ -200,3 +200,8 @@ MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/mydb
 WANDB_API_KEY=your_secret_key
 ```
 
+<p align="left">
+  <a href="https://mlopsprojectk64.streamlit.app" target="_blank">
+    <img src="https://img.shields.io/badge/Launch_App-red?style=for-the-badge" alt="Bank Marketing App" width="200"/>
+  </a>
+</p>
