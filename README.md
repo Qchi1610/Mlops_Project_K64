@@ -137,8 +137,7 @@ For hyperparameter tuning, **W&B Sweeps** were used to automate the search proce
 ![image](https://github.com/user-attachments/assets/e312d668-8002-4f55-8406-61fa638b2bcd)
 
 After tuning, only the best-performing model (based on validation metrics) was selected. This model was re-trained with the best parameters and evaluated on the test set. The final model, along with its performance, was then registered to the W&B Model Registry.
-
-![image](https://github.com/user-attachments/assets/3d0b10b5-3662-4418-8178-4e7732b715e9)![image](https://github.com/user-attachments/assets/a36ac59e-cf5b-4a3b-aba0-545b70041145)
+![image](https://github.com/user-attachments/assets/3d0b10b5-3662-4418-8178-4e7732b715e9)[image](https://github.com/user-attachments/assets/a36ac59e-cf5b-4a3b-aba0-545b70041145)
 
 ---
 
