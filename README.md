@@ -68,7 +68,7 @@ For full attribute definitions, see the paper:
    - pipeline.py
    - query_live_api.py
    - test_main.py
-2. bankmkt: Contains the core source code or Python package related to the bank marketing use case, such as data processing and model training.
+2. bankmkt: This folder contains scripts and executable files for setting up and managing the banking market project environment, including activation and deactivation scripts, as well as Python and pip executables for managing dependencies.
 3. notebook: Directory for experiments, exploratory data analysis, and model development artifacts.
    - notebooks
    - data
