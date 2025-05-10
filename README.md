@@ -79,7 +79,7 @@ For full attribute definitions, see the paper:
 ## 📑 Model Card
 
 The model was deployed to the web using the FastAPI package and API tests were created. The API tests will be embedded in a CI/CD framework using GitHub Actions. After we built our API locally and tested it, we deployed it to Render and tested it again live. Weights and Biases were used to manage and track all artifacts.  
-![Flowchart](img/Flowchart.png)
+![Flowchart](images/Flowchart.png)
 
 The project notebooks are organized into the following 7 parts:
 
@@ -115,7 +115,7 @@ The project notebooks are organized into the following 7 parts:
 
 ## Practice notebooks
 To understand the procedures of design code on local, including important procedures like: fetching data, visualization, preprocessing, checking data, segregating data, training, and testing, you should run step-by-step all notebooks on the /notebook directory. Note that, you should select a right kernel is .venv to avoid libraries conflict by
-![VirEnv](img/VirEnv.png)
+![VirEnv](images/VirEnv.png)
 
 You should register Weight and Bias to storage all artifacts, metrics, and models. You can register your account on wandb. After that, you should create a virtual environment file is notebooks/.env
 ## Weight and Biases Model Registry
@@ -148,18 +148,18 @@ After tuning, only the best-performing model (based on validation metrics) was s
 
    * Users access the Streamlit web app.
    * They input data for prediction.
-   ![Streamlit](img/Streamlit.png)
+   ![Streamlit](images/Streamlit.png)
 2. **Backend API (FastAPI):**
 
    * Streamlit sends the input data to a FastAPI endpoint (e.g., `/predict`) via a POST request.
    * FastAPI loads the model, processes the input, returns the prediction.
    * The data and prediction are saved to MongoDB.
-   ![FastAPI](img/FastAPI.png)
+   ![FastAPI](images/FastAPI.png)
 3. **MongoDB Integration:**
 
    * FastAPI connects to MongoDB using a URI stored in `.env`.
    * It saves each prediction request with metadata (timestamp, input, prediction).
-   ![MongoDB](img/MongoDB.png)
+   ![MongoDB](images/MongoDB.png)
 4. **Deployment (Render):**
 
    * The backend (FastAPI) is deployed as a web service on Render.
@@ -171,7 +171,7 @@ After tuning, only the best-performing model (based on validation metrics) was s
 ## 🚀 Deployment Steps (on Render)
 
 ### 🧠 Backend (FastAPI)
-![Render](img/Render.png)
+![Render](images/Render.png)
 1. Create a new **Web Service** on Render.
 2. Link it to your GitHub repo.
 3. Set the start command:
@@ -183,7 +183,7 @@ After tuning, only the best-performing model (based on validation metrics) was s
 4. Make sure `Dockerfile` or `requirements.txt` is correctly set up.
 5. Instance Type choose Free
 5. Set environment variables like `MONGODB_URI`, `WANDB_API_KEY` in the Render dashboard.
-![Render2](img/Render2.png)
+![Render2](images/Render2.png)
 
 ### 🎯 Frontend (Streamlit)
 
