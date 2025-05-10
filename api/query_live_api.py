@@ -12,6 +12,7 @@ input_data = {
     "contact": "telephone",
     "month": "jun",
     "day_of_week": "thu",
+    "duration": 245,
     "campaign": 1,
     "pdays": 999,
     "previous": 0,

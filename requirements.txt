@@ -24,3 +24,4 @@ plotly
 ydata_profiling
 streamlit
 lightgbm==4.1.0
+xgboost

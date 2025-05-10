@@ -27,6 +27,7 @@ month = st.selectbox("Last Contact Month", [
     "jul", "aug", "sep", "oct", "nov", "dec"
 ])
 day_of_week = st.selectbox("Last Contact Day of the Week", ["mon", "tue", "wed", "thu", "fri"])
+duration = st.number_input("Duration of Last Contact (in seconds)", min_value=0, value=0)
 campaign = st.number_input("Number of Contacts in Current Campaign", min_value=1, value=1)
 pdays = st.number_input("Days Since Last Contact (-1 or 999 if never)", value=999)
 previous = st.number_input("Number of Contacts Before This Campaign", min_value=0, value=0)
@@ -51,6 +52,7 @@ if st.button("Predict"):
         "contact": contact,
         "month": month,
         "day_of_week": day_of_week,
+        "duration": duration,
         "campaign": campaign,
         "pdays": pdays,
         "previous": previous,

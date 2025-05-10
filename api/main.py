@@ -45,6 +45,7 @@ class BankInput(BaseModel):
     contact: str
     month: str
     day_of_week: str
+    duration: int
     campaign: int
     pdays: int
     previous: int
