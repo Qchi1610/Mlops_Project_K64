@@ -35,17 +35,57 @@ This project applies MLOps principles to the entire machine learning lifecycle, 
 
 ---
 
-## 🧰 Folder Structure
- Mlops_Project_K64/ │
-├── artifacts/ # Stores processed data and models 
-├── components/ # Reusable ML pipeline components 
-├── config/ # YAML-based configuration files 
-├── data/ # Raw and processed datasets 
-├── logger/ # Logging configuration 
-├── mlflow/ # MLflow experiments and registry 
-├── notebook/ # EDA and testing notebooks 
-├── pipelines/ # Training and testing pipelines 
-├── prediction_service/ # Streamlit UI and MongoDB logic 
-├── templates/ # YAML templates 
-├── Flowchart.png # MLOps system diagram 
-└── README.md ``` </code> </pre>
+## 📚 Dataset Information
+
+This project uses the **Bank Marketing Dataset** with social and economic features, made publicly available for research purposes.
+
+> **Citation Request**  
+> If you use this dataset, please cite:  
+> **[Moro et al., 2014]** S. Moro, P. Cortez, and P. Rita.  
+> *A Data-Driven Approach to Predict the Success of Bank Telemarketing*.  
+> Decision Support Systems. [DOI: 10.1016/j.dss.2014.03.001](http://dx.doi.org/10.1016/j.dss.2014.03.001)  
+> - [PDF](http://dx.doi.org/10.1016/j.dss.2014.03.001)  
+> - [BibTeX](http://www3.dsi.uminho.pt/pcortez/bib/2014-dss.txt)
+
+### 🔍 Source
+
+- Created by: Sérgio Moro, Paulo Cortez, and Paulo Rita (2014)  
+- Original UCI Repository: [Bank Marketing Dataset](http://archive.ics.uci.edu/ml/datasets/Bank+Marketing)
+
+### 📌 Dataset Variants
+
+- `bank-additional-full.csv`: Full dataset (41,188 instances)
+- `bank-additional.csv`: 10% subset (4,119 instances), suitable for computationally intensive models
+
+### 🧠 Prediction Task
+
+- **Goal**: Predict if a customer will subscribe to a term deposit (target: `y`, values: `yes` or `no`)
+
+---
+
+### 📈 Features Overview
+
+| Feature Group | Attributes |
+|---------------|------------|
+| **Client Info** | `age`, `job`, `marital`, `education`, `default`, `housing`, `loan` |
+| **Last Contact** | `contact`, `month`, `day_of_week`, `duration`* |
+| **Campaign Data** | `campaign`, `pdays`, `previous`, `poutcome` |
+| **Social/Economic** | `emp.var.rate`, `cons.price.idx`, `cons.conf.idx`, `euribor3m`, `nr.employed` |
+| **Target** | `y` (binary: `yes` / `no`) |
+
+> ⚠️ **Note on `duration`**: This feature strongly affects the output but is only known after the call. It should be excluded in realistic predictive models and used only for benchmarking.
+
+---
+
+### ⚠️ Missing Values
+
+Some categorical features contain missing values labeled as `"unknown"`. You may choose to:
+- Treat `"unknown"` as a separate category
+- Remove or impute these values based on context
+
+---
+
+For full attribute definitions, see the paper:  
+**[Moro et al., 2014]** *A Data-Driven Approach to Predict the Success of Bank Telemarketing*
+
+
