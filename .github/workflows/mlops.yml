@@ -28,6 +28,10 @@ jobs:
       run: 
         wandb login ${{ secrets.WANDB_KEY_ID }}
 
+    - name: Set up environment variables from GitHub Secrets
+      run:
+        echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> $GITHUB_ENV
+
     - name: Run API tests
       run: pytest api/test_main.py
 
