@@ -36,4 +36,16 @@ This project applies MLOps principles to the entire machine learning lifecycle, 
 ---
 
 ## 🧰 Folder Structure
-<pre> ## 🧰 Folder Structure <code> ``` Mlops_Project_K64/ │ ├── artifacts/ # Stores processed data and models ├── components/ # Reusable ML pipeline components ├── config/ # YAML-based configuration files ├── data/ # Raw and processed datasets ├── logger/ # Logging configuration ├── mlflow/ # MLflow experiments and registry ├── notebook/ # EDA and testing notebooks ├── pipelines/ # Training and testing pipelines ├── prediction_service/ # Streamlit UI and MongoDB logic ├── templates/ # YAML templates ├── Flowchart.png # MLOps system diagram └── README.md ``` </code> </pre>
+ Mlops_Project_K64/ │
+├── artifacts/ # Stores processed data and models 
+├── components/ # Reusable ML pipeline components 
+├── config/ # YAML-based configuration files 
+├── data/ # Raw and processed datasets 
+├── logger/ # Logging configuration 
+├── mlflow/ # MLflow experiments and registry 
+├── notebook/ # EDA and testing notebooks 
+├── pipelines/ # Training and testing pipelines 
+├── prediction_service/ # Streamlit UI and MongoDB logic 
+├── templates/ # YAML templates 
+├── Flowchart.png # MLOps system diagram 
+└── README.md ``` </code> </pre>
