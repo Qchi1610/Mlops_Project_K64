@@ -119,20 +119,25 @@ To understand the procedures of design code on local, including important proced
 ![VirEnv](images/VirEnv.png)
 
 You should register Weight and Bias to storage all artifacts, metrics, and models. You can register your account on wandb. After that, you should create a virtual environment file is notebooks/.env
+
+## Model Development
+The model was developed in a Jupyter Notebook (6_train.ipynb), and includes data cleaning, data visualisation, feature engineering, and model evaluation using 10-fold cross-validation.
+
+Initially, simple models were trained separately. 10 different algorithms are evaluated: Logistic Regression, KNearest Neighbors, Decision Tree, Random Forest and 5 Boosting algorithms. Below are 10-fold cross-validated results for each of the evaluated models based on **ROC-AUC** and **recall**.
+![image](https://github.com/user-attachments/assets/4fbc6696-71dc-4b30-8d66-dbe30acfed35)
+![media_images_Algorithm Comparison_0_193e517d0dcaf6deced2](https://github.com/user-attachments/assets/c0bdcd22-1b89-447b-899a-733024ce34e2)
+
 ## Weight and Biases Model Registry
-Weight and Biases is used to register model training runs. Artifacts, which includes models, plots and statistics, are stored in a Weight and Biases, while the server is run in a Render, local Docker container and accessible via the url specified above.
+Weight and Biases is used to register model training runs. Artifacts, which includes models, plots and statistics, are stored in a Weight and Biases, while the server is run in a Render, local Docker container and accessible via the URL specified above.
 
-After each model training, tuning and cross-validation run, the 5 best models are logged with their corresponding accuracy, AUC, recall and specificity on both the validation and test sets. To speed things up, currently also only 5 different parameter combinations are evaluated, but this can easily be adjusted.
-![image](https://github.com/user-attachments/assets/ceffc7b9-d4ac-44cb-a6af-adb8a3ec968a)
-
-Initially, several simple models were trained separately. From these, the two best-performing models were selected for further hyperparameter tuning. Evaluation metrics including **AUC-PR**, **ROC-AUC**, **recall**, **precision**, and **F1-score** were logged on the validation set.
+After model training and cross-validation run, the two best-performing models were selected for further hyperparameter tuning. Evaluation metrics including **AUC-PR**, **ROC-AUC**, **recall**, **precision**, and **F1-score** were logged on the validation set.
 ![image](https://github.com/user-attachments/assets/ceffc7b9-d4ac-44cb-a6af-adb8a3ec968a)
 
 For hyperparameter tuning, **W&B Sweeps** were used to automate the search process and track all experiment runs. Due to the inability to pass the `class_weight` parameter via sweep configuration, an additional tuning session was conducted locally using **Optuna**, implemented in `notebook/6_train.ipynb`.
 ![image](https://github.com/user-attachments/assets/e312d668-8002-4f55-8406-61fa638b2bcd)
 
 After tuning, only the best-performing model (based on validation metrics) was selected. This model was re-trained with the best parameters and evaluated on the test set. The final model, along with its performance, was then registered to the W&B Model Registry.
-![image](https://github.com/user-attachments/assets/a36ac59e-cf5b-4a3b-aba0-545b70041145)
+![image](https://github.com/user-attachments/assets/15e1f1ab-8c39-48a3-b72d-e7736adf4a04) ![image](https://github.com/user-attachments/assets/a36ac59e-cf5b-4a3b-aba0-545b70041145)
 
 ---
 
