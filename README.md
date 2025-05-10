@@ -87,3 +87,12 @@ So, in general, the notebooks used were divided into 7 parts:
 5. Splitting the data between training and testing.
 6. Training
 7. Test
+   
+---
+## 🚀 How to Run the Project
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Qchi1610/Mlops_Project_K64.git
+   cd Mlops_Project_K64
+
