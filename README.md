@@ -122,6 +122,16 @@ You should register Weight and Bias to storage all artifacts, metrics, and model
 Weight and Biases is used to register model training runs. Artifacts, which includes models, plots and statistics, are stored in a Weight and Biases, while the server is run in a Render, local Docker container and accessible via the url specified above.
 
 After each model training, tuning and cross-validation run, the 5 best models are logged with their corresponding accuracy, AUC, recall and specificity on both the validation and test sets. To speed things up, currently also only 5 different parameter combinations are evaluated, but this can easily be adjusted.
+![image](https://github.com/user-attachments/assets/ceffc7b9-d4ac-44cb-a6af-adb8a3ec968a)
+
+Initially, several simple models were trained separately. From these, the two best-performing models were selected for further hyperparameter tuning. Evaluation metrics including **AUC-PR**, **ROC-AUC**, **recall**, **precision**, and **F1-score** were logged on the validation set.
+![image](https://github.com/user-attachments/assets/ceffc7b9-d4ac-44cb-a6af-adb8a3ec968a)
+
+For hyperparameter tuning, **W&B Sweeps** were used to automate the search process and track all experiment runs. Due to the inability to pass the `class_weight` parameter via sweep configuration, an additional tuning session was conducted locally using **Optuna**, implemented in `notebook/6_train.ipynb`.
+![image](https://github.com/user-attachments/assets/e312d668-8002-4f55-8406-61fa638b2bcd)
+
+After tuning, only the best-performing model (based on validation metrics) was selected. This model was re-trained with the best parameters and evaluated on the test set. The final model, along with its performance, was then registered to the W&B Model Registry.
+![image](https://github.com/user-attachments/assets/a36ac59e-cf5b-4a3b-aba0-545b70041145)
 
 ## 🛠 Tech Stack
 
@@ -194,3 +204,4 @@ After each model training, tuning and cross-validation run, the 5 best models ar
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/mydb
 WANDB_API_KEY=your_secret_key
 ```
+
