@@ -60,6 +60,20 @@ This project uses the **Bank Marketing Dataset** with social and economic featur
 
 For full attribute definitions, see the paper:  
 **[Moro et al., 2014]** *A Data-Driven Approach to Predict the Success of Bank Telemarketing*
+## Folder Structure
+1. api
+   - app.py
+   - main.py
+   - pipeline.py
+   - query_live_api.py
+   - test_main.py
+2. bankmkt
+3. notebook
+   - notebooks
+   - data
+   - wandb
+   - artifact
+5. environment.yml
 
 ## Model Card
 The model was deployed to the web using the FastAPI package and API tests were created. The API tests will be embedded in a CI/CD framework using GitHub Actions. After we built our API locally and tested it, we deployed it to Render and tested it again live. Weights and Biases were used to manage and track all artifacts.
