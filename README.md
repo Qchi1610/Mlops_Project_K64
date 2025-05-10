@@ -57,10 +57,11 @@ This project uses the **Bank Marketing Dataset** with social and economic featur
 
 ---
 
-
 For full attribute definitions, see the paper:  
 **[Moro et al., 2014]** *A Data-Driven Approach to Predict the Success of Bank Telemarketing*
-## Folder Structure
+
+## 📁 Folder Structure
+
 1. api
    - app.py
    - main.py
@@ -73,38 +74,44 @@ For full attribute definitions, see the paper:
    - data
    - wandb
    - artifact
-5. environment.yml
+4. environment.yml
 
-## Model Card
-The model was deployed to the web using the FastAPI package and API tests were created. The API tests will be embedded in a CI/CD framework using GitHub Actions. After we built our API locally and tested it, we deployed it to Render and tested it again live. Weights and Biases were used to manage and track all artifacts.
+## 📑 Model Card
+
+The model was deployed to the web using the FastAPI package and API tests were created. The API tests will be embedded in a CI/CD framework using GitHub Actions. After we built our API locally and tested it, we deployed it to Render and tested it again live. Weights and Biases were used to manage and track all artifacts.  
 ![Flowchart](Flowchart.png)
-So, in general, the notebooks used were divided into 7 parts:
 
-1. The search for data
-2. Exploratory analysis
-3. Pre-Processing
-4. Tests
-5. Splitting the data between training and testing.
-6. Training
-7. Test
-   
+The project notebooks are organized into the following 7 parts:
+
+1. Data Search
+2. Exploratory Data Analysis (EDA)
+3. Data Preprocessing
+4. Model Testing
+5. Data Splitting (Training & Testing)
+6. Model Training
+7. Model Evaluation
+
 ---
+
 ## 🚀 How to Run the Project
 
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/Qchi1610/Mlops_Project_K64.git
    cd Mlops_Project_K64
-2. **Create virtual environment**
+2. **Create a Virtual Environment**
    ```bash
    conda env create -f environment.yml
-To activate this environment, using the following command:
+3. Activate the Virtual Environment
    ```bash
-   # For linux, macOS
+     # For Linux/macOS
    source bankmkt/bin/activate
-   # For windows command line
+
+   # For Windows (Command Line)
    bankmkt\Scripts\activate
 
-   # For windows PowerShell
+   # For Windows (PowerShell)
    bankmkt\Scripts\Activate.ps1
 
+## Practice notebooks
+To understand the procedures of design code on local, including important procedures like: fetching data, visualization, preprocessing, checking data, segregating data, training, and testing, you should run step-by-step all notebooks on the /notebook directory. Note that, you should select a right kernel is .venv to avoid libraries conflict by
