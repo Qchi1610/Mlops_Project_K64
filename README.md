@@ -137,32 +137,6 @@ After tuning, only the best-performing model (based on validation metrics) was s
 
 ---
 
-## ⚙️ How It Works
-
-1. **User Interface (Streamlit):**
-
-   - Users access the Streamlit web app.
-   - They input data for prediction.
-   ![Streamlit](images/Streamlit.png)
-2. **Backend API (FastAPI):**
-
-   - Streamlit sends the input data to a FastAPI endpoint (e.g., `/predict`) via a POST request.
-   - FastAPI loads the model, processes the input, returns the prediction.
-   - The data and prediction are saved to MongoDB.
-   ![FastAPI](images/FastAPI.png)
-3. **MongoDB Integration:**
-
-   - FastAPI connects to MongoDB using a URI stored in `.env`.
-   - It saves each prediction request with metadata (timestamp, input, prediction).
-   ![MongoDB](images/MongoDB.png)
-4. **Deployment (Render):**
-
-   - The backend (FastAPI) is deployed as a web service on Render.
-   - The frontend (Streamlit) is deployed separately as a web service.
-   - Communication happens via the backend’s public URL.
-
----
-
 ## 🚀 Deployment Steps (on Render)
 
 ### 🧠 Backend (FastAPI)
@@ -199,6 +173,34 @@ After tuning, only the best-performing model (based on validation metrics) was s
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/mydb
 WANDB_API_KEY=your_secret_key
 ```
+
+---
+
+## ⚙️ How It Works
+
+1. **User Interface (Streamlit):**
+
+   - Users access the Streamlit web app.
+   - They input data for prediction.
+   ![Streamlit](images/Streamlit.png)
+2. **Backend API (FastAPI):**
+
+   - Streamlit sends the input data to a FastAPI endpoint (e.g., `/predict`) via a POST request.
+   - FastAPI loads the model, processes the input, returns the prediction.
+   - The data and prediction are saved to MongoDB.
+   ![FastAPI](images/FastAPI.png)
+3. **MongoDB Integration:**
+
+   - FastAPI connects to MongoDB using a URI stored in `.env`.
+   - It saves each prediction request with metadata (timestamp, input, prediction).
+   ![MongoDB](images/MongoDB.png)
+4. **Deployment (Render):**
+
+   - The backend (FastAPI) is deployed as a web service on Render.
+   - The frontend (Streamlit) is deployed separately as a web service.
+   - Communication happens via the backend’s public URL.
+
+---
 
 <p align="left">
   <a href="https://mlopsprojectk64.streamlit.app" target="_blank">
