@@ -19,15 +19,14 @@ This project applies MLOps principles to the entire machine learning lifecycle, 
 
 ## ⚙️ Technologies Used
 
-- **Python 3.10**
+- **Python 3.8**
 - **scikit-learn**
 - **pandas**, **numpy**, **matplotlib**, **seaborn**
-- **MLflow** – for model tracking and registry
+- **Wandb** – for model tracking and registry
 - **Streamlit** – for interactive user input and inference
 - **FastAPI** - for backend
 - **MongoDB** – for storing new test input data
 - **Render** - for deployment
-- **n8n** – optional future automation (e.g., retraining trigger)
 
 ---
 
