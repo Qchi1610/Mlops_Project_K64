@@ -23,6 +23,8 @@ jobs:
 
     - name: Run API tests
       run: pytest api/test_main.py
+      env:
+        WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
 
     - name: Login in wandb
       run: 
