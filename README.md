@@ -62,24 +62,24 @@ For full attribute definitions, see the paper:
 
 ## 📁 Folder Structure
 
-1. api
+1. api: This folder contains backend source code for handling APIs and data pipelines.
    - app.py
    - main.py
    - pipeline.py
    - query_live_api.py
    - test_main.py
-2. bankmkt
-3. notebook
+2. bankmkt: This folder contains scripts and executable files for setting up and managing the banking market project environment, including activation and deactivation scripts, as well as Python and pip executables for managing dependencies.
+3. notebook: Directory for experiments, exploratory data analysis, and model development artifacts.
    - notebooks
    - data
    - wandb
    - artifact
-4. environment.yml
+4. environment.yml: Conda environment configuration file listing required dependencies and versions to ensure consistent setup across environments.
 
 ## 📑 Model Card
 
 The model was deployed to the web using the FastAPI package and API tests were created. The API tests will be embedded in a CI/CD framework using GitHub Actions. After we built our API locally and tested it, we deployed it to Render and tested it again live. Weights and Biases were used to manage and track all artifacts.  
-![Flowchart](Flowchart.png)
+![Flowchart](img/Flowchart.png)
 
 The project notebooks are organized into the following 7 parts:
 
@@ -115,15 +115,13 @@ The project notebooks are organized into the following 7 parts:
 
 ## Practice notebooks
 To understand the procedures of design code on local, including important procedures like: fetching data, visualization, preprocessing, checking data, segregating data, training, and testing, you should run step-by-step all notebooks on the /notebook directory. Note that, you should select a right kernel is .venv to avoid libraries conflict by
-![VirEnv](VirEnv.png)
+![VirEnv](img/VirEnv.png)
 
 You should register Weight and Bias to storage all artifacts, metrics, and models. You can register your account on wandb. After that, you should create a virtual environment file is notebooks/.env
 ## Weight and Biases Model Registry
 Weight and Biases is used to register model training runs. Artifacts, which includes models, plots and statistics, are stored in a Weight and Biases, while the server is run in a Render, local Docker container and accessible via the url specified above.
 
 After each model training, tuning and cross-validation run, the 5 best models are logged with their corresponding accuracy, AUC, recall and specificity on both the validation and test sets. To speed things up, currently also only 5 different parameter combinations are evaluated, but this can easily be adjusted.
-
----
 
 ## 🛠 Tech Stack
 
