@@ -24,7 +24,9 @@ This project applies MLOps principles to the entire machine learning lifecycle, 
 - **pandas**, **numpy**, **matplotlib**, **seaborn**
 - **MLflow** – for model tracking and registry
 - **Streamlit** – for interactive user input and inference
+- **FastAPI** - for backend
 - **MongoDB** – for storing new test input data
+- **Render** - for deployment
 - **n8n** – optional future automation (e.g., retraining trigger)
 
 ---
@@ -132,13 +134,6 @@ For hyperparameter tuning, **W&B Sweeps** were used to automate the search proce
 
 After tuning, only the best-performing model (based on validation metrics) was selected. This model was re-trained with the best parameters and evaluated on the test set. The final model, along with its performance, was then registered to the W&B Model Registry.
 ![image](https://github.com/user-attachments/assets/a36ac59e-cf5b-4a3b-aba0-545b70041145)
-
-## 🛠 Tech Stack
-
-* **Backend:** FastAPI
-* **Frontend:** Streamlit
-* **Database:** MongoDB
-* **Deployment:** Render
 
 ---
 
