@@ -24,7 +24,7 @@ This project applies MLOps principles to the entire machine learning lifecycle, 
 - **pandas**, **numpy**, **matplotlib**, **seaborn**
 - **Wandb** – for model tracking and registry
 - **Streamlit** – for interactive user input and inference
-- **FastAPI** - for backend
+- **FastAPI** - for backend to make predictions using a trained model
 - **MongoDB** – for storing new test input data
 - **Render** - for deployment
 

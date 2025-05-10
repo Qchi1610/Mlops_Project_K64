@@ -1,7 +1,6 @@
 from fastapi.testclient import TestClient
-from api.main import app  # đảm bảo đường dẫn đúng
+from api.main import app 
 import time
-import os
 
 client = TestClient(app)
 
@@ -11,7 +10,7 @@ def test_root():
     assert r.status_code == 200
     assert "Hello World" in r.text
 
-# ✅ Test POST /predict với input hợp lệ - dự đoán có thể là yes hoặc no
+# ✅ Test POST /predict with valid input - prediction can be yes or no
 def test_predict_valid_input():
     person = {
         "age": 35,
@@ -41,13 +40,13 @@ def test_predict_valid_input():
     assert r.status_code == 200
     assert r.json()["prediction"] in ["yes", "no"]
 
-# ❌ Test POST /predict với key sai
+# ❌ Test POST /predict with incorrect key
 def test_predict_invalid_key():
     person = {
         "age": 35,
         "job": "technician",
         "marital": "married",
-        "educa": "tertiary",  # key sai (education -> educa)
+        "educa": "tertiary",  # incorrect key (education -> educa)
         "default": "no",
         "housing": "yes",
         "loan": "no",
@@ -70,10 +69,10 @@ def test_predict_invalid_key():
     r = client.post("/predict", json=person)
     assert r.status_code == 422  # vì sai key
 
-# ❌ Test POST /predict với kiểu dữ liệu sai
+# ❌ Test POST /predict with incorrect data type
 def test_predict_wrong_type():
     person = {
-        "age": "thirty",  # sai kiểu
+        "age": "thirty",  # incorrect type
         "job": "technician",
         "marital": "married",
         "education": "tertiary",
@@ -99,7 +98,7 @@ def test_predict_wrong_type():
     r = client.post("/predict", json=person)
     assert r.status_code == 422
 
-# ⏱️ Test thời gian dự đoán
+# ⏱️ Test prediction time
 def test_prediction_time_under_3s():
     person = {
         "age": 35,

@@ -1,0 +1,44 @@
+name: BankMkt CI/CD
+
+on:
+  push:
+    branches:
+      - experiment-1
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v3.0.0
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: pip install --upgrade pip && pip install -r requirements.txt
+
+    - name: Run API tests
+      run: pytest test_main.py
+
+    - name: Login in wandb
+      run: 
+        wandb login ${{ secrets.WANDB_KEY_ID }}
+
+    - name: Deploy to Render
+      if: success()
+      env:
+        RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        SERVICE_ID: 'srv-d0efnmp5pdvs73althsg'  # Replace with your actual service ID
+      run: |
+        curl -X POST "https://api.render.com/v1/services/$SERVICE_ID/deploys" \
+        -H "Authorization: Bearer $RENDER_API_KEY" \
+        -H "Content-Type: application/json" \
+        -d '{}'
+
+    - name: Testing API
+      run:
+        pytest api -vv -s
