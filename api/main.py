@@ -62,7 +62,6 @@ async def root():
     return "<h1>Bank Marketing Model API</h1>"
 
 @app.post("/predict")
-@app.post("/predict")
 def predict(input_data: BankInput):
     try:
         model_export_path = run.use_artifact(ARTIFACT).file()
