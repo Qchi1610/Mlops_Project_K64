@@ -102,5 +102,9 @@ To activate this environment, using the following command:
    ```bash
    # For linux, macOS
    source bankmkt/bin/activate
+   # For windows command line
+   bankmkt\Scripts\activate
 
+   # For windows PowerShell
+   bankmkt\Scripts\Activate.ps1
 
