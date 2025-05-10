@@ -121,7 +121,7 @@ You should register Weight and Bias to storage all artifacts, metrics, and model
 ## Weight and Biases Model Registry
 Weight and Biases is used to register model training runs. Artifacts, which includes models, plots and statistics, are stored in a Weight and Biases, while the server is run in a Render, local Docker container and accessible via the url specified above.
 
-Initially, several simple models were trained separately. From these, the two best-performing models were selected for further hyperparameter tuning. Evaluation metrics including **accuracy**, **AUC-PR**, **ROC-AUC**, **recall**, **precision**, and **F1-score** were logged on the validation set.
+Initially, several simple models were trained separately. From these, the two best-performing models were selected for further hyperparameter tuning. Evaluation metrics including **AUC-PR**, **ROC-AUC**, **recall**, **precision**, and **F1-score** were logged on the validation set.
 ![image](https://github.com/user-attachments/assets/ceffc7b9-d4ac-44cb-a6af-adb8a3ec968a)
 
 For hyperparameter tuning, **W&B Sweeps** were used to automate the search process and track all experiment runs. Due to the inability to pass the `class_weight` parameter via sweep configuration, an additional tuning session was conducted locally using **Optuna**, implemented in `notebook/6_train.ipynb`.
