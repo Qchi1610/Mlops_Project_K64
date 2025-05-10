@@ -95,8 +95,12 @@ So, in general, the notebooks used were divided into 7 parts:
    ```bash
    git clone https://github.com/Qchi1610/Mlops_Project_K64.git
    cd Mlops_Project_K64
+2. **Create virtual environment**
+   ```bash
+   conda env create -f environment.yml
+To activate this environment, using the following command:
+   ```bash
+   # For linux, macOS
+   source bankmkt/bin/activate
 
-2. **Create virtual environment**
-  ```bash
-conda env create -f environment.yml
-2. **Create virtual environment**
+
