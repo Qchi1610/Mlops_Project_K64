@@ -212,3 +212,25 @@ WANDB_API_KEY=your_secret_key
     <img src="https://img.shields.io/badge/Launch_App-red?style=for-the-badge" alt="Bank Marketing App" width="200"/>
   </a>
 </p>
+---
+Test with PyTests
+## ✅ Testing with Pytest
+
+Basic unit and integration tests are included to validate the model training pipeline and ensure that all preprocessing steps work correctly.
+
+To run the test, execute the following script:
+'''bash
+python -m pytest notebook/test_main.py
+
+This script includes the following tests:
+
+| Test Name                        | Description                                                               |
+|----------------------------------|---------------------------------------------------------------------------|
+| `test_load_train_data`           | Checks if the training dataset is loaded correctly from the local artifact |
+| `test_load_test_data`            | Checks if the test dataset is loaded correctly from the local artifact     |
+| `test_target_encoder`            | Verifies that the target encoder transforms labels consistently            |
+| `test_model_prediction`          | Ensures the model makes predictions and recall is at least 0.65            |
+| `test_model_auc`                 | Ensures ROC-AUC score is at least 0.7                                     |
+| `test_prediction_single_sample`  | Checks if the model can predict a single row without error                 |
+| `test_prediction_invalid_input`  | Validates that the model raises an error when given invalid input          |
+
