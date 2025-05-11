@@ -220,7 +220,7 @@ Basic unit and integration tests are included to validate the model training pip
 
 To run the test, execute the following script:
 ```bash
-python -m pytest notebook/test_main.py
+python -m pytest notebook/test_main.py```
 
 This script includes the following tests:
 
