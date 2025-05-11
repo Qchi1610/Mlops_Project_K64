@@ -213,14 +213,9 @@ WANDB_API_KEY=your_secret_key
   </a>
 </p>
 ---
-Test with PyTests
-## ✅ Testing with Pytest
+## Testing with PyTests
 
 Basic unit and integration tests are included to validate the model training pipeline and ensure that all preprocessing steps work correctly.
-
-To run the test, execute the following script:
-```bash
-python -m pytest notebook/test_main.py```
 
 This script includes the following tests:
 
@@ -234,3 +229,6 @@ This script includes the following tests:
 | `test_prediction_single_sample`  | Checks if the model can predict a single row without error                 |
 | `test_prediction_invalid_input`  | Validates that the model raises an error when given invalid input          |
 
+To run the test, execute the following script:
+```bash
+python -m pytest notebook/test_main.py
