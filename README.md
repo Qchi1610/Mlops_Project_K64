@@ -219,7 +219,7 @@ Test with PyTests
 Basic unit and integration tests are included to validate the model training pipeline and ensure that all preprocessing steps work correctly.
 
 To run the test, execute the following script:
-'''bash
+```bash
 python -m pytest notebook/test_main.py
 
 This script includes the following tests:
